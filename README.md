@@ -34,4 +34,4 @@ GET: Get all Subnets of specific VPC
 
 # Output
 
-![Output 1](output/op1.png)
+![Output 1](output/op3.jpeg)

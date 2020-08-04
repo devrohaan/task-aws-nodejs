@@ -31,3 +31,7 @@ GET: Get all VPCs of specific region
 > /api/v1/aws/regions/{region_code}/vpcs/{vpc_id}/subnets
 
 GET: Get all Subnets of specific VPC
+
+# Output
+
+![Output 1](output/op1.png)

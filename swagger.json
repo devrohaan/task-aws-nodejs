@@ -1,0 +1,152 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Druva Technical Interview Task: AWS APIs",
+    "description": "Druva AWS APIs to fetch Regions, VPCs and Subnets",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3003",
+  "basePath": "/api/v1/aws",
+  "tags": [
+    {
+      "name": "AWS",
+      "description": "API to fetch AWS services: Regions, VPCs, Subnets"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/regions": {
+      "get": {
+        "tags": [
+          "Services"
+        ],
+        "summary": "Returns a List of AWS regions",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Regions"
+            }
+          }
+        }
+      }
+    },
+    "/regions/{region_code}/vpcs": {
+      "parameters": [
+        {
+          "name": "region_code",
+          "in": "path",
+          "required": true,
+          "description": "Region Code to fetch VPCs in given region",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Services"
+        ],
+        "summary": "Returns a List of VPCs in specific region",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VPCs"
+            }
+          }
+        }
+      }
+    },
+    "/regions/{region_code}/vpcs/{vpc_id}/subnets": {
+      "parameters": [
+        {
+          "name": "region_code",
+          "in": "path",
+          "required": true,
+          "description": "Region Code to fetch VPCs in given region",
+          "type": "string"
+        },
+        {
+          "name": "vpc_id",
+          "in": "path",
+          "required": true,
+          "description": "VPC ID to fetch Subnets in given VPC",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Services"
+        ],
+        "summary": "Returns a List of Subnets in specific VPC",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Subnets"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Regions": {
+      "properties": {
+        "region_name": {
+          "type": "string"
+        },
+        "region_full_name": {
+          "type": "string"
+        },
+        "region_code": {
+          "type": "string",
+          "uniqueItems": true
+        }
+      }
+    },
+    "VPCs": {
+      "properties": {
+        "vpc_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "state": {
+          "type": "string"
+        },
+        "cidr_block": {
+          "type": "string"
+        }
+      }
+    },
+    "Subnets": {
+      "properties": {
+        "subnet_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "state": {
+          "type": "string"
+        },
+        "cidr_block": {
+          "type": "string"
+        },
+        "vpc_id": {
+          "type": "string",
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}
